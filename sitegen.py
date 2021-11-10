@@ -5,11 +5,10 @@ import html
 def files_to_json(folder, output):
   temp_json = {}
   for dir in os.listdir(folder):
-    dir = dir.replace('_', ' ')
     temp_json[dir] = {}
     temp_json[dir]['files'] = []
-    for file in os.listdir(folder + '/' + dir.replace(' ', '_')):
-      temp_json[dir]['files'].append(folder + '/' + dir.replace(' ', '_') + '/' + file)
+    for file in os.listdir(folder + '/' + dir):
+      temp_json[dir]['files'].append(folder + '/' + dir + '/' + file)
   with open(output, 'w') as f:
     json.dump(temp_json, f)
 
