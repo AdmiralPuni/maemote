@@ -5,10 +5,11 @@ import html
 def files_to_json(folder, output):
   temp_json = {}
   for dir in os.listdir(folder):
+    dir = dir.replace('_', ' ')
     temp_json[dir] = {}
     temp_json[dir]['files'] = []
-    for file in os.listdir(folder + '/' + dir):
-      temp_json[dir]['files'].append(folder + '/' + dir + '/' + file)
+    for file in os.listdir(folder + '/' + dir.replace(' ', '_')):
+      temp_json[dir]['files'].append(folder + '/' + dir.replace(' ', '_') + '/' + file)
   with open(output, 'w') as f:
     json.dump(temp_json, f)
 
@@ -43,8 +44,8 @@ def generate_html():
     f.write('</html>\n')
 
 def main():
-  #files_to_json('res/images/myusu', 'files.json')
-  generate_html()
+  files_to_json('res/images/myusu', 'res/data/files.json')
+  #generate_html()
   return
 
 if __name__ == '__main__':
